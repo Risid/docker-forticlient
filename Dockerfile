@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 RUN apt-get update && \
-  apt-get install -y expect wget net-tools iproute ipppd iptables ssh curl && \
+  apt-get install -y expect wget net-tools iproute ipppd iptables ssh curl squid && \
   rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root
@@ -17,4 +17,9 @@ RUN /usr/share/forticlient/opt/forticlient-sslvpn/64bit/helper/setup.linux.sh 2
 COPY forticlient /usr/bin/forticlient
 COPY start.sh /start.sh
 
+COPY squid.conf /etc/squid/squid.conf
+
 CMD [ "/start.sh" ]
+
+# Expose squid proxy port
+EXPOSE 3128
