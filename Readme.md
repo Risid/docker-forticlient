@@ -11,14 +11,14 @@ The container uses the forticlientsslvpn_cli linux binary to manage ppp interfac
 # Start the priviledged docker container with squid http proxy
 docker run -it --rm \
   --privileged \
-  -p 3128
+  -p 31280:3128 \
   -e VPNADDR=host:port \
   -e VPNUSER=me@domain \
   -e VPNPASS=secret \
   risid/forticlient
 
 # Test squid proxy by curl
-curl -x localhost:port 202.207.240.241
+curl -x localhost:31280 202.207.247.51:8065
 
 ```
 
